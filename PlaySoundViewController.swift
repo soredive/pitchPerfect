@@ -7,34 +7,67 @@
 //
 
 import UIKit
+import AVFoundation
 
 class PlaySoundViewController: UIViewController {
     
-    @IBOutlet weak var btnRabbit : UIButton!
-    @IBOutlet weak var btnSnail : UIButton!
-    @IBOutlet weak var btnDarthbader : UIButton!
-    @IBOutlet weak var btnChipmunk : UIButton!
-    @IBOutlet weak var btnEcho : UIButton!
-    @IBOutlet weak var btnRevert : UIButton!
+    // MARK: buttons
+    @IBOutlet weak var rabbitButton : UIButton!
+    @IBOutlet weak var snailButton : UIButton!
+    @IBOutlet weak var vaderButton : UIButton!
+    @IBOutlet weak var chipmunkButton : UIButton!
+    @IBOutlet weak var echoButton : UIButton!
+    @IBOutlet weak var reverbButton : UIButton!
+    @IBOutlet weak var stopButton : UIButton!
+    @IBOutlet weak var timeLabel: UILabel!
     
-    @IBAction func playSound(sender: UIButton!){
+    // MARK: playing function
+    @IBAction func startPlay(sender: UIButton!){
         print("play sound button")
+        switch ButtonType(rawValue: sender.tag)! {
+        case .Slow:
+            playSound(rate: 1.5)
+        case .Fast:
+            playSound(rate: 0.5)
+        case .Chipmunk:
+            playSound(pitch: 1000)
+        case .Vader:
+            playSound(pitch: -1000)
+        case .Echo:
+            playSound(echo: true)
+        case .Reverb:
+            playSound(reverb: true)
+        }
+        configureUI(PlayingState.Playing)
     }
     
     @IBAction func stopPlay(sender: AnyObject!){
         print("stop play button")
+        stopAudio()
     }
     
     enum ButtonType : Int {
-        case Slow = 0, fast, chipmunk, darthbader, echo, revert
+        case Slow = 0, Fast, Chipmunk, Vader, Echo, Reverb
     }
     
     var recordedAudioURL : NSURL!
+    
+    var audioFile : AVAudioFile!
+    var audioEngine : AVAudioEngine!
+    var audioPlayerNode : AVAudioPlayerNode!
+    var stopTimer : NSTimer!
+    
+    override func viewWillAppear(animated: Bool) {
+        configureUI(.NotPlaying)
+        
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         print("play soudn view controller did loaded")
         // Do any additional setup after loading the view.
+        setupAudio()
+        
     }
 
     override func didReceiveMemoryWarning() {

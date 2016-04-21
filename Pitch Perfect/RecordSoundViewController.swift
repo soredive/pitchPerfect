@@ -56,10 +56,7 @@ class RecordSoundViewController: UIViewController , AVAudioRecorderDelegate {
         recordButtonStart.enabled = true
         recordButtonStop.enabled = false
         showingLabel.hidden = true
-        
         stopRecord()
-        
-        
     }
     
 
