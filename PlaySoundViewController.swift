@@ -11,7 +11,7 @@ import AVFoundation
 
 class PlaySoundViewController: UIViewController {
     
-    // MARK: buttons
+    // MARK: IBOutlets
     @IBOutlet weak var rabbitButton : UIButton!
     @IBOutlet weak var snailButton : UIButton!
     @IBOutlet weak var vaderButton : UIButton!
@@ -20,7 +20,12 @@ class PlaySoundViewController: UIViewController {
     @IBOutlet weak var reverbButton : UIButton!
     @IBOutlet weak var stopButton : UIButton!
     @IBOutlet weak var timeLabel: UILabel!
-    
+	
+	// MARK: button type
+	enum ButtonType : Int {
+		case Slow = 0, Fast, Chipmunk, Vader, Echo, Reverb
+	}
+	
     // MARK: playing function
     @IBAction func startPlay(sender: UIButton!){
         print("play sound button")
@@ -45,34 +50,35 @@ class PlaySoundViewController: UIViewController {
         print("stop play button")
         stopAudio()
     }
-    
-    enum ButtonType : Int {
-        case Slow = 0, Fast, Chipmunk, Vader, Echo, Reverb
-    }
-    
+	
+	// MARK: audio objects
     var recordedAudioURL : NSURL!
-    
     var audioFile : AVAudioFile!
     var audioEngine : AVAudioEngine!
     var audioPlayerNode : AVAudioPlayerNode!
     var stopTimer : NSTimer!
-    
+	
+	// MARK: change button image content mode
+	func resizeImgSize(){
+		rabbitButton.imageView?.contentMode = .ScaleAspectFit
+		snailButton.imageView?.contentMode = .ScaleAspectFit
+		chipmunkButton.imageView?.contentMode = .ScaleAspectFit
+		vaderButton.imageView?.contentMode = .ScaleAspectFit
+		echoButton.imageView?.contentMode = .ScaleAspectFit
+		reverbButton.imageView?.contentMode = .ScaleAspectFit
+	}
+	
     override func viewWillAppear(animated: Bool) {
         configureUI(.NotPlaying)
-        
     }
-
+	
     override func viewDidLoad() {
         super.viewDidLoad()
         print("play soudn view controller did loaded")
         // Do any additional setup after loading the view.
+		
+		resizeImgSize()
         setupAudio()
-        
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     /*

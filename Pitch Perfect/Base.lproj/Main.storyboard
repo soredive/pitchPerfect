@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -28,34 +29,39 @@
                                     <action selector="btnClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="d2j-Xx-hmh"/>
                                 </connections>
                             </button>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Recording..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0bn-VD-Uqz">
-                                <rect key="frame" x="236" y="380" width="128" height="29"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="heightClass=compact" misplaced="YES">
-                                    <rect key="frame" x="236" y="80" width="128" height="29"/>
-                                </variation>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GgW-6Y-k3H" userLabel="StopButton">
-                                <rect key="frame" x="275" y="439" width="50" height="50"/>
-                                <state key="normal" image="stop"/>
-                                <variation key="heightClass=compact" ambiguous="YES" misplaced="YES">
-                                    <rect key="frame" x="250" y="129" width="100" height="100"/>
-                                </variation>
-                                <connections>
-                                    <action selector="stopBtnClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="v4W-tY-2m3"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="ZK0-wK-iBc">
+                                <rect key="frame" x="20" y="360" width="560" height="230"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Tap to Record" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0bn-VD-Uqz">
+                                        <rect key="frame" x="0.0" y="0.0" width="560" height="115"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                        <variation key="heightClass=compact" misplaced="YES">
+                                            <rect key="frame" x="236" y="80" width="128" height="29"/>
+                                        </variation>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GgW-6Y-k3H" userLabel="StopButton">
+                                        <rect key="frame" x="0.0" y="115" width="560" height="115"/>
+                                        <state key="normal" image="stop"/>
+                                        <variation key="heightClass=compact" ambiguous="YES" misplaced="YES">
+                                            <rect key="frame" x="250" y="129" width="100" height="100"/>
+                                        </variation>
+                                        <connections>
+                                            <action selector="stopBtnClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="v4W-tY-2m3"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.65723634070000003" green="0.8086280132" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="0sH-oT-l9r" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="9NZ-IF-qZR"/>
-                            <constraint firstItem="GgW-6Y-k3H" firstAttribute="top" secondItem="0bn-VD-Uqz" secondAttribute="bottom" constant="30" id="Hdc-3M-z8G"/>
-                            <constraint firstItem="0bn-VD-Uqz" firstAttribute="top" secondItem="0sH-oT-l9r" secondAttribute="bottom" constant="30" id="NQJ-1b-7Ht"/>
+                            <constraint firstItem="ZK0-wK-iBc" firstAttribute="top" secondItem="0sH-oT-l9r" secondAttribute="baseline" constant="10" id="Ebn-wz-BxZ"/>
                             <constraint firstItem="0sH-oT-l9r" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Uet-aI-Oee"/>
-                            <constraint firstItem="0bn-VD-Uqz" firstAttribute="centerX" secondItem="0sH-oT-l9r" secondAttribute="centerX" id="q3e-1o-L9u"/>
-                            <constraint firstItem="GgW-6Y-k3H" firstAttribute="centerX" secondItem="0bn-VD-Uqz" secondAttribute="centerX" id="wAS-Dd-8Z8"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ZK0-wK-iBc" secondAttribute="trailing" id="V5Q-jp-Y9l"/>
+                            <constraint firstItem="ZK0-wK-iBc" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="awm-fS-aZz"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="ZK0-wK-iBc" secondAttribute="bottom" constant="10" id="uOv-Q6-M3n"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="9Hc-06-jAa"/>

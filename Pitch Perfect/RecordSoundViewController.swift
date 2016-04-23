@@ -41,37 +41,37 @@ class RecordSoundViewController: UIViewController , AVAudioRecorderDelegate {
         try! session.setActive(false)
         
     }
-    
+	
+	func setBtnStatus(type: String){
+		switch type {
+		case "record":
+			recordButtonStart.enabled = false
+			recordButtonStop.enabled = true
+			showingLabel.text = "Recording in Progress"
+		case "stop":
+			recordButtonStart.enabled = true
+			recordButtonStop.enabled = false
+			showingLabel.text = ""
+		default:
+			break
+		}
+	}
+	
     @IBAction func btnClicked(sender: UIButton) {
         print("clicked")
-        recordButtonStart.enabled = false
-        recordButtonStop.enabled = true
-        showingLabel.hidden = false
-        
+		setBtnStatus("record")
         record()
     }
     
     
     @IBAction func stopBtnClicked(sender: UIButton) {
-        recordButtonStart.enabled = true
-        recordButtonStop.enabled = false
-        showingLabel.hidden = true
+		setBtnStatus("stop")
         stopRecord()
     }
-    
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        //self.recordingLabel.hidden = true
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(false)
+		showingLabel.text = "Tap to Record"
         recordButtonStop.enabled = false
         print("view will appear")
     }
@@ -80,7 +80,7 @@ class RecordSoundViewController: UIViewController , AVAudioRecorderDelegate {
         print("record has been finished")
         
         if flag {
-            self.performSegueWithIdentifier("stopRecording", sender: audioRecorder.url)
+            performSegueWithIdentifier("stopRecording", sender: audioRecorder.url)
         }else{
             print("record has been failed")
         }
